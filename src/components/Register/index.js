@@ -1,20 +1,19 @@
-import {Component} from 'react'
+import Navbar from '../NavBar'
 
 import MeetUpContext from '../../context/MeetupContext'
 
 import {
-  BgContainer,
-  NavLink,
-  Logo,
   RegisterContainer,
-  RegisterImage,
+  FormContainer,
+  FormImg,
   Form,
-  Title,
+  FormHead,
   Label,
   Input,
   Select,
-  Option,
-  RegisterNow,
+  Options,
+  FormBtn,
+  FormErr,
 } from './styledComponents'
 
 const topicsList = [
@@ -40,75 +39,79 @@ const topicsList = [
   },
 ]
 
-class Register extends Component {
-  render() {
-    return (
-      <MeetUpContext.Consumer>
-        {value => {
-          const {
-            name,
-            topic,
-            changeTopic,
-            toggleIsRegistered,
-            changeName,
-          } = value
+const Register = props => (
+  <MeetUpContext.Consumer>
+    {value => {
+      const {
+        name,
+        topic,
+        updateName,
+        updateTopic,
+        changeRegistrationStatus,
+        updateError,
+        registerError,
+      } = value
 
-          const onChangeName = event => {
-            changeName(event)
-          }
+      const submitForm = event => {
+        event.preventDefault()
+        changeRegistrationStatus()
 
-          const onChangeTopic = event => {
-            changeTopic(event)
-          }
+        if (name !== '' && topic !== '') {
+          const {history} = props
+          history.replace('/')
+        } else {
+          updateError(true)
+        }
+      }
 
-          const changeToggle = () => {
-            if (name !== undefined) {
-              toggleIsRegistered()
-            }
-          }
+      const onChangeName = event => {
+        updateName(event.target.value)
+      }
 
-          return (
-            <BgContainer>
-              <Logo
-                src="https://assets.ccbp.in/frontend/react-js/meetup/website-logo-img.png"
-                alt="website logo"
+      const onChangeTopic = event => {
+        updateTopic(event.target.value)
+      }
+
+      return (
+        <>
+          <Navbar />
+          <RegisterContainer>
+            <FormContainer>
+              <FormImg
+                src="https://assets.ccbp.in/frontend/react-js/meetup/website-register-img.png"
+                alt="website register"
               />
-              <RegisterContainer>
-                <RegisterImage
-                  src="https://assets.ccbp.in/frontend/react-js/meetup/website-register-img.png"
-                  alt="website register"
+              <Form onSubmit={submitForm}>
+                <FormHead>Let us Join</FormHead>
+                <Label htmlFor="name">NAME</Label>
+                <Input
+                  type="text"
+                  value={name}
+                  onChange={onChangeName}
+                  placeholder="Your name"
+                  id="name"
                 />
-                <Form>
-                  <Title>Let us join</Title>
-                  <Label htmlFor="name">NAME</Label>
-                  <Input
-                    type="text"
-                    placeholder="Your name"
-                    id="name"
-                    value={name}
-                    onChange={onChangeName}
-                  />
-                  <Label>TOPICS</Label>
-                  <Select onChange={onChangeTopic} value={topic}>
-                    {topicsList.map(each => (
-                      <Option key={each.id} value={each.id}>
-                        {each.displayText}
-                      </Option>
-                    ))}
-                  </Select>
-                  <NavLink to="/">
-                    <RegisterNow onClick={changeToggle}>
-                      Register Now
-                    </RegisterNow>
-                  </NavLink>
-                </Form>
-              </RegisterContainer>
-            </BgContainer>
-          )
-        }}
-      </MeetUpContext.Consumer>
-    )
-  }
-}
+                <Label htmlFor="topic">TOPICS</Label>
+                <Select value={topic} id="topic" onChange={onChangeTopic}>
+                  {topicsList.map(each => (
+                    <Options key={each.id} value={each.id}>
+                      {each.displayText}
+                    </Options>
+                  ))}
+                </Select>
+                <FormBtn onClick={submitForm} type="submit">
+                  Register Now
+                </FormBtn>
+                {registerError ? (
+                  <FormErr>please enter your name?</FormErr>
+                ) : null}
+              </Form>
+            </FormContainer>
+          </RegisterContainer>
+        </>
+      )
+    }}
+  </MeetUpContext.Consumer>
+)
 
 export default Register

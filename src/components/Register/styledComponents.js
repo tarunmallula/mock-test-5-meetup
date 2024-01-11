@@ -1,94 +1,100 @@
 import styled from 'styled-components'
 
-import {Link} from 'react-router-dom'
-
-export const BgContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
-  min-height: 100vh;
-`
-export const NavLink = styled(Link)`
-  text-decoration: none;
-`
-
-export const Logo = styled.img`
-  width: 170px;
-  height: 50px;
-  align-self: flex-start;
-  margin-top: 0px;
-`
 export const RegisterContainer = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 20px;
+`
+
+export const FormContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
   width: 80%;
-  margin-top: 100px;
-  align-self: center;
+  height: 70vh;
 `
-export const RegisterImage = styled.img`
-  width: 35%;
+
+export const FormImg = styled.img`
+  width: 40%;
 `
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 60%;
+  margin-top: 20px;
 `
 
-export const Title = styled.h1`
+export const FormHead = styled.h1`
   color: #334155;
-  font-family: 'Roboto';
-  font-size: 46px;
+  font-size: 50px;
   font-weight: 500;
-  margin-bottom: 15px;
-`
-export const Label = styled.label`
-  color: #64748b;
-  font-family: 'Roboto';
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 10px;
-`
-export const Input = styled.input`
-  height: 40px;
-  width: 280px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  color: #7b8794;
-  font-family: 'Roboto';
-  font-size: 14px;
-  font-weight: 400;
-  padding: 6px 16px 6px 16px;
-  outline: none;
+  margin: 0;
   margin-bottom: 20px;
 `
+
+export const Label = styled.label`
+  color: #7b8794;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+`
+
+export const Input = styled.input`
+  color: #7b8794;
+  font-size: 18px;
+  font-weight: 700;
+  height: 40px;
+  width: 50%;
+  outline: none;
+  border: 1px solid #7b8794;
+  margin-bottom: 30px;
+  padding-left: 15px;
+`
+
 export const Select = styled.select`
+  color: #334155;
+  background-color: transparent;
+  font-size: 18px;
+  font-weight: 700;
   height: 40px;
-  width: 280px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  padding: 6px 16px 6px 16px;
+  width: 50%;
   outline: none;
-  cursor: pointer;
+  border: 1px solid #7b8794;
+  margin-bottom: 30px;
+  padding-left: 15px;
 `
-export const Option = styled.option`
-  font-family: 'Roboto';
-  font-size: 14px;
-  font-weight: 400;
+
+export const Options = styled.option`
+  color: #334155;
+  font-size: 18px;
 `
-export const RegisterNow = styled.button`
+
+export const FormBtn = styled.button`
   color: #ffffff;
-  background-color: #3b82f6;
-  font-family: 'Roboto';
-  font-size: 16px;
-  font-weight: 500;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 16px 8px 16px;
+  background-color: #2563eb;
+  font-size: 18px;
+  font-weight: 700;
   height: 40px;
-  width: 160px;
+  width: 200px;
+  border-radius: 10px;
+  margin-bottom: 25px;
   margin-top: 20px;
+  border: none;
   outline: none;
   cursor: pointer;
+`
+
+export const FormErr = styled.p`
+  color: #ff0b37;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0;
 `

@@ -10,59 +10,44 @@ import NotFound from './components/NotFound'
 
 import './App.css'
 
-const topicsList = [
-  {
-    id: 'ARTS_AND_CULTURE',
-    displayText: 'Arts and Culture',
-  },
-  {
-    id: 'CAREER_AND_BUSINESS',
-    displayText: 'Career and Business',
-  },
-  {
-    id: 'EDUCATION_AND_LEARNING',
-    displayText: 'Education and Learning',
-  },
-  {
-    id: 'FASHION_AND_BEAUTY',
-    displayText: 'Fashion and Learning',
-  },
-  {
-    id: 'GAMES',
-    displayText: 'Games',
-  },
-]
-
 class App extends Component {
   state = {
+    isRegister: false,
     name: '',
-    topic: topicsList[0].id,
-    isRegistered: false,
+    topic: 'Arts and Culture',
+    registerError: false,
   }
 
-  changeName = event => {
-    this.setState({name: event.target.value})
+  updateName = updateName => {
+    this.setState({name: updateName})
   }
 
-  changeTopic = event => {
-    this.setState({topic: event.target.value})
+  updateTopic = updateTopic => {
+    this.setState({topic: updateTopic})
   }
 
-  toggleIsRegistered = () => {
-    this.setState(prevState => ({isRegistered: !prevState.isRegistered}))
+  changeRegistrationStatus = () => {
+    this.setState({isRegister: true})
+  }
+
+  updateError = response => {
+    this.setState({registerError: response})
   }
 
   render() {
-    const {name, topic, isRegistered} = this.state
+    const {isRegister, name, topic, registerError} = this.state
+
     return (
       <MeetUpContext.Provider
         value={{
+          isRegister,
           name,
           topic,
-          isRegistered,
-          changeName: this.changeName,
-          changeTopic: this.changeTopic,
-          toggleIsRegistered: this.toggleIsRegistered,
+          changeRegistrationStatus: this.changeRegistrationStatus,
+          updateName: this.updateName,
+          updateTopic: this.updateTopic,
+          registerError,
+          updateError: this.updateError,
         }}
       >
         <Switch>
